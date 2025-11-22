@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "STUDY TIMER",
   description: "勉強時間を記録・管理するPWAアプリケーション",
+  icons: {
+    icon: "/study-timer-icon.png",
+    apple: "/study-timer-icon.png",
+  },
 };
 
 export default function RootLayout({
