@@ -492,7 +492,7 @@ export default function RecordPage() {
             <SubjectSelector
               subjects={subjects}
               selectedSubject={selectedSubject}
-              onSelectSubject={setSelectedSubject}
+              onSelectSubject={(subjectName: string) => setSelectedSubject(subjectName as Subject)}
               disabled={isRunning}
             />
           </div>
