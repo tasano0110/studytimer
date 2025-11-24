@@ -1,57 +1,96 @@
 'use client'
 
-import { Subject } from '@/types'
-
-const subjects: Subject[] = ['指定なし', '算数', '国語', '理科', '社会']
+import { SubjectEntity } from '@/types'
+import { useTheme } from '@/lib/contexts/ThemeContext'
 
 interface SubjectSelectorProps {
-  selectedSubject: Subject
-  onSelectSubject: (subject: Subject) => void
+  subjects: SubjectEntity[]
+  selectedSubject: string
+  onSelectSubject: (subjectName: string) => void
   disabled?: boolean
 }
 
 export function SubjectSelector({
+  subjects,
   selectedSubject,
   onSelectSubject,
   disabled = false,
 }: SubjectSelectorProps) {
-  const mainSubjects = subjects.slice(1) // 算数〜社会
+  const { colors } = useTheme()
+
+  // 教科を分類
+  const defaultSubject = subjects.find((s) => s.is_default)
+  const builtinSubjects = subjects.filter((s) => s.is_builtin && !s.is_default)
+  const customSubjects = subjects.filter((s) => !s.is_builtin && !s.is_default)
+
+  // ボタンのスタイルを生成
+  const getButtonStyle = (isSelected: boolean) => {
+    if (isSelected) {
+      return {
+        backgroundColor: colors.primary,
+        color: 'white',
+      }
+    }
+    return {}
+  }
+
+  const getButtonClassName = (isSelected: boolean) => {
+    const base = 'px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+    if (isSelected) {
+      return `${base} text-white`
+    }
+    return `${base} bg-white text-gray-700 border border-gray-300`
+  }
 
   return (
     <div className="flex flex-col items-center gap-2">
-      {/* 上段：指定なしのみ */}
-      <div className="flex justify-center">
-        <button
-          key="指定なし"
-          onClick={() => onSelectSubject('指定なし')}
-          disabled={disabled}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-            selectedSubject === '指定なし'
-              ? 'bg-[#003c68] text-white'
-              : 'bg-white text-gray-700 border border-gray-300 hover:bg-[#003c68]/5'
-          }`}
-        >
-          指定なし
-        </button>
-      </div>
-
-      {/* 下段：算数〜社会 */}
-      <div className="flex flex-wrap justify-center gap-2">
-        {mainSubjects.map((subject) => (
+      {/* 上段：指定なし */}
+      {defaultSubject && (
+        <div className="flex justify-center">
           <button
-            key={subject}
-            onClick={() => onSelectSubject(subject)}
+            onClick={() => onSelectSubject(defaultSubject.subject_name)}
             disabled={disabled}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-              selectedSubject === subject
-                ? 'bg-[#003c68] text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-[#003c68]/5'
-            }`}
+            className={getButtonClassName(selectedSubject === defaultSubject.subject_name)}
+            style={getButtonStyle(selectedSubject === defaultSubject.subject_name)}
           >
-            {subject}
+            {defaultSubject.subject_name}
           </button>
-        ))}
-      </div>
+        </div>
+      )}
+
+      {/* 2段目：初期教科 */}
+      {builtinSubjects.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-2">
+          {builtinSubjects.map((subject) => (
+            <button
+              key={subject.subject_id}
+              onClick={() => onSelectSubject(subject.subject_name)}
+              disabled={disabled}
+              className={getButtonClassName(selectedSubject === subject.subject_name)}
+              style={getButtonStyle(selectedSubject === subject.subject_name)}
+            >
+              {subject.subject_name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* 3段目：カスタム教科 */}
+      {customSubjects.length > 0 && (
+        <div className="flex flex-wrap justify-center gap-2">
+          {customSubjects.map((subject) => (
+            <button
+              key={subject.subject_id}
+              onClick={() => onSelectSubject(subject.subject_name)}
+              disabled={disabled}
+              className={getButtonClassName(selectedSubject === subject.subject_name)}
+              style={getButtonStyle(selectedSubject === subject.subject_name)}
+            >
+              {subject.subject_name}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

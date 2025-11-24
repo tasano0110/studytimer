@@ -21,7 +21,12 @@ export function TodaySessionsList({
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-[#003c68]">本日の記録</h2>
+        <h2
+          className="text-lg font-bold"
+          style={{ color: 'var(--color-primary)' }}
+        >
+          本日の記録
+        </h2>
         <Button
           variant="secondary"
           onClick={onAddManual}
