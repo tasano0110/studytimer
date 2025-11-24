@@ -2,7 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { Header } from '@/components/layout/Header'
 import { FooterNav } from '@/components/layout/FooterNav'
-import type { User } from '@/types'
+import { ThemeProvider } from '@/lib/contexts/ThemeContext'
+import type { User, UserPreference, ColorTheme } from '@/types'
 
 export default async function ProtectedLayout({
   children,
@@ -26,11 +27,22 @@ export default async function ProtectedLayout({
     .eq('user_id', authUser.id)
     .single<User>()
 
+  // ユーザーのテーマ設定を取得
+  const { data: preference } = await supabase
+    .from('user_preferences')
+    .select('*')
+    .eq('user_id', authUser.id)
+    .single<UserPreference>()
+
+  const initialTheme: ColorTheme = preference?.color_theme || 'blue'
+
   return (
-    <div className="min-h-screen bg-[#003c68]/5 flex flex-col">
-      <Header user={user} />
-      <main className="flex-1 pb-20">{children}</main>
-      <FooterNav userRole={user?.role || 'user'} />
-    </div>
+    <ThemeProvider initialTheme={initialTheme}>
+      <div className="min-h-screen bg-[#003c68]/5 flex flex-col">
+        <Header user={user} />
+        <main className="flex-1 pb-20">{children}</main>
+        <FooterNav userRole={user?.role || 'user'} />
+      </div>
+    </ThemeProvider>
   )
 }

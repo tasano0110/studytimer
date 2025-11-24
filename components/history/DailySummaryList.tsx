@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { formatDate } from '@/lib/utils/dateUtils'
 import { formatDuration } from '@/lib/utils/timeUtils'
 import type { DailySummary } from '@/types'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Award } from 'lucide-react'
 
 interface DailySummaryListProps {
   summaries: DailySummary[]
@@ -32,10 +32,17 @@ export function DailySummaryList({ summaries, baseUrl = '/history' }: DailySumma
             <span className="min-w-[100px] font-medium text-gray-900">
               {formatDate(summary.date)}
             </span>
-            <span className="min-w-[80px] font-bold text-[#003c68]">
+            <span
+              className="min-w-[80px] font-bold"
+              style={{ color: 'var(--color-primary)' }}
+            >
               {formatDuration(summary.total_minutes)}
             </span>
-            <span className="text-gray-600">{summary.session_count}セッション</span>
+            {summary.has_stamp && (
+              <div className="flex items-center gap-1 text-yellow-500">
+                <Award className="w-5 h-5" />
+              </div>
+            )}
           </div>
           <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
         </Link>

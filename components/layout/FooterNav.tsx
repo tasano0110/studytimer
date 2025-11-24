@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Clock, ClipboardList, Settings } from 'lucide-react'
+import { Clock, ClipboardList, Settings, Shield } from 'lucide-react'
 import type { Role } from '@/types'
 
 interface FooterNavProps {
@@ -47,6 +47,18 @@ export function FooterNav({ userRole }: FooterNavProps) {
             <span className="text-xs mt-1">履歴</span>
           </Link>
 
+          <Link
+            href="/settings"
+            className={`flex flex-col items-center justify-center w-full h-full transition-colors ${
+              isActive('/settings')
+                ? 'text-[#003c68]'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Settings className="w-6 h-6" />
+            <span className="text-xs mt-1">設定</span>
+          </Link>
+
           {userRole === 'admin' && (
             <Link
               href="/admin"
@@ -56,7 +68,7 @@ export function FooterNav({ userRole }: FooterNavProps) {
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              <Settings className="w-6 h-6" />
+              <Shield className="w-6 h-6" />
               <span className="text-xs mt-1">管理</span>
             </Link>
           )}

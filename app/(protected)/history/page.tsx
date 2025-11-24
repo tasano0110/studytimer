@@ -41,15 +41,43 @@ export default async function HistoryPage() {
         date,
         total_minutes: session.duration_minutes || 0,
         session_count: 1,
+        has_stamp: false,
       })
     }
   })
 
+  // スタンプ情報を取得
+  const { data: stamps } = await supabase
+    .from('stamps')
+    .select('earned_date')
+    .eq('user_id', user.id)
+
+  // スタンプが存在する日付をセットに追加
+  const stampDates = new Set(stamps?.map((s) => s.earned_date) || [])
+
+  // サマリーにスタンプ情報を追加
+  summaryMap.forEach((summary) => {
+    summary.has_stamp = stampDates.has(summary.date)
+  })
+
   const summaries = Array.from(summaryMap.values())
+
+  // 累積スタンプ数を計算
+  const totalStamps = stamps?.length || 0
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-[#003c68] mb-6">学習履歴</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--color-primary)' }}>
+          学習履歴
+        </h1>
+        <div className="text-base sm:text-lg font-medium text-gray-700">
+          累積獲得スタンプ数：
+          <span className="font-bold" style={{ color: 'var(--color-primary)' }}>
+            {totalStamps}個
+          </span>
+        </div>
+      </div>
       <DailySummaryList summaries={summaries} />
     </div>
   )
