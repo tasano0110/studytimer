@@ -18,7 +18,7 @@ export const THEME_COLORS = {
 
 interface ThemeContextType {
   theme: ColorTheme
-  colors: typeof THEME_COLORS['blue']
+  colors: typeof THEME_COLORS[ColorTheme]
   setTheme: (theme: ColorTheme) => void
   isLoading: boolean
 }
