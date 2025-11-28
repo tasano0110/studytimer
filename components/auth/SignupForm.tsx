@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
@@ -13,41 +12,46 @@ export function SignupForm() {
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      // ユーザー登録
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            name,
-          },
+      // サーバーサイドAPIを使用してユーザー登録
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          email,
+          password,
+          name,
+        }),
       })
 
-      if (authError) {
-        toast.error(authError.message || '登録に失敗しました')
+      const data = await response.json()
+
+      if (!response.ok) {
+        console.error('Signup error:', data)
+        toast.error(data.error || '登録に失敗しました')
+        if (data.details) {
+          console.error('Error details:', data.details)
+        }
         return
       }
 
-      if (!authData.user) {
-        toast.error('登録に失敗しました')
-        return
+      if (data.requiresEmailConfirmation) {
+        toast.success(data.message)
+      } else {
+        toast.success('登録が完了しました。ログインしてください。')
       }
 
-      // usersテーブルへの追加はSupabaseのトリガーが自動で行う
-      toast.success('登録が完了しました。ログインしてください。')
-
-      // ログイン画面へリダイレクト
       router.push('/login')
     } catch (error) {
-      toast.error('登録に失敗しました')
+      console.error('Signup error:', error)
+      toast.error('登録に失敗しました: ' + (error instanceof Error ? error.message : '不明なエラー'))
     } finally {
       setLoading(false)
     }
