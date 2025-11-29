@@ -68,12 +68,12 @@ export default async function HistoryPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
-        <h1 className="text-2xl font-bold" style={{ color: 'var(--color-primary)' }}>
+        <h1 className="text-2xl font-bold text-slate-700">
           学習履歴
         </h1>
-        <div className="text-base sm:text-lg font-medium text-gray-700">
+        <div className="text-base sm:text-lg font-medium text-slate-700">
           累積獲得スタンプ数：
-          <span className="font-bold" style={{ color: 'var(--color-primary)' }}>
+          <span className="font-bold text-slate-700">
             {totalStamps}個
           </span>
         </div>

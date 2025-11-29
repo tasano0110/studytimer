@@ -118,20 +118,20 @@ export default function AccountSettings() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">アカウント設定</h2>
-      <p className="text-sm text-gray-600 mb-6">
+      <h2 className="text-lg font-bold text-slate-700 mb-4">アカウント設定</h2>
+      <p className="text-sm text-slate-600 mb-6">
         アカウント情報を変更できます。
       </p>
 
       {/* Name Settings */}
       <div className="border-b border-gray-200 pb-8 mb-8">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">名前の変更</h3>
+        <h3 className="text-base font-bold text-slate-700 mb-4">名前の変更</h3>
         <div className="mb-2">
-          <p className="text-sm text-gray-600">現在の名前</p>
-          <p className="font-medium text-gray-900">{user?.name || '未設定'}</p>
+          <p className="text-sm text-slate-600">現在の名前</p>
+          <p className="font-medium text-slate-700">{user?.name || '未設定'}</p>
         </div>
         <div className="mb-4 mt-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
             新しい名前（{name.length}/100文字）
           </label>
           <input
@@ -150,10 +150,10 @@ export default function AccountSettings() {
 
       {/* Password Settings */}
       <div>
-        <h3 className="text-xl font-bold text-gray-900 mb-4">パスワードの変更</h3>
+        <h3 className="text-base font-bold text-slate-700 mb-4">パスワードの変更</h3>
         <div className="space-y-4 mb-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-slate-700 mb-2">
               現在のパスワード
             </label>
             <input
@@ -165,7 +165,7 @@ export default function AccountSettings() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-slate-700 mb-2">
               新しいパスワード（8文字以上）
             </label>
             <input
@@ -177,7 +177,7 @@ export default function AccountSettings() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-slate-700 mb-2">
               新しいパスワード（確認）
             </label>
             <input

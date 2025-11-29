@@ -34,11 +34,11 @@ export default async function ProtectedLayout({
     .eq('user_id', authUser.id)
     .single<UserPreference>()
 
-  const initialTheme: ColorTheme = preference?.color_theme || 'blue'
+  const initialTheme: ColorTheme = preference?.color_theme || 'slate'
 
   return (
     <ThemeProvider initialTheme={initialTheme}>
-      <div className="min-h-screen bg-[#003c68]/5 flex flex-col">
+      <div className="min-h-screen bg-slate-50 flex flex-col">
         <Header user={user} />
         <main className="flex-1 pb-20">{children}</main>
         <FooterNav userRole={user?.role || 'user'} />

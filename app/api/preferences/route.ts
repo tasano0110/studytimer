@@ -49,20 +49,47 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const { color_theme } = body
 
-    if (color_theme && !['blue', 'pink'].includes(color_theme)) {
+    if (color_theme && !['slate', 'teal', 'blue', 'pink'].includes(color_theme)) {
       return NextResponse.json({ error: 'Invalid color theme' }, { status: 400 })
     }
 
-    const { data: preference, error } = await supabase
+    // Check if preference already exists
+    const { data: existingPreference } = await supabase
       .from('user_preferences')
-      .update({ color_theme })
+      .select('preference_id')
       .eq('user_id', user.id)
-      .select()
       .single()
+
+    let preference
+    let error
+
+    if (existingPreference) {
+      // Update existing preference
+      const result = await supabase
+        .from('user_preferences')
+        .update({ color_theme })
+        .eq('user_id', user.id)
+        .select()
+        .single()
+      preference = result.data
+      error = result.error
+    } else {
+      // Insert new preference
+      const result = await supabase
+        .from('user_preferences')
+        .insert({ user_id: user.id, color_theme })
+        .select()
+        .single()
+      preference = result.data
+      error = result.error
+    }
 
     if (error) {
       console.error('Error updating preferences:', error)
-      return NextResponse.json({ error: 'Failed to update preferences' }, { status: 500 })
+      return NextResponse.json({
+        error: 'Failed to update preferences',
+        details: error.message
+      }, { status: 500 })
     }
 
     return NextResponse.json({ preference })

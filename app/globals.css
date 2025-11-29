@@ -3,8 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-primary: #003c68;
-  --color-primary-hover: #00508d;
+  --color-primary: #475569;
+  --color-primary-hover: #64748b;
 }
 
 @theme inline {

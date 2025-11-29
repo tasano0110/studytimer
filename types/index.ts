@@ -1,7 +1,7 @@
 export type Subject = '算数' | '国語' | '理科' | '社会' | '指定なし'
 export type Role = 'user' | 'admin'
 export type DayType = 'weekday' | 'weekend'
-export type ColorTheme = 'blue' | 'pink'
+export type ColorTheme = 'slate' | 'teal' | 'blue' | 'pink'
 
 export interface User {
   user_id: string

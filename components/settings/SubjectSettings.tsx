@@ -156,15 +156,15 @@ export default function SubjectSettings() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">教科設定</h2>
-      <p className="text-sm text-gray-600 mb-6">
+      <h2 className="text-lg font-bold text-slate-700 mb-4">教科設定</h2>
+      <p className="text-sm text-slate-600 mb-6">
         学習セッションで選択できる教科を管理できます。
       </p>
 
       {/* Default Subject */}
       {defaultSubject && (
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">デフォルト</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-2">デフォルト</h3>
           <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
             <span className="font-medium">{defaultSubject.subject_name}</span>
             <span className="text-sm text-gray-500 ml-2">（削除不可）</span>
@@ -175,7 +175,7 @@ export default function SubjectSettings() {
       {/* Builtin Subjects */}
       {builtinSubjects.length > 0 && (
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">初期教科</h3>
+          <h3 className="text-sm font-medium text-slate-700 mb-2">初期教科</h3>
           <div className="space-y-2">
             {builtinSubjects.map((subject) => (
               <div
@@ -207,7 +207,7 @@ export default function SubjectSettings() {
 
       {/* Custom Subjects */}
       <div className="mb-6">
-        <h3 className="text-sm font-medium text-gray-700 mb-2">追加した教科</h3>
+        <h3 className="text-sm font-medium text-slate-700 mb-2">追加した教科</h3>
         {customSubjects.length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             まだ教科が追加されていません
@@ -261,7 +261,7 @@ export default function SubjectSettings() {
         title="教科を追加"
       >
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
             教科名（{subjectName.length}/20文字）
           </label>
           <input
@@ -301,7 +301,7 @@ export default function SubjectSettings() {
         title="教科を編集"
       >
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
             教科名（{subjectName.length}/20文字）
           </label>
           <input
