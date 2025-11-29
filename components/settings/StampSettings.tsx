@@ -127,15 +127,15 @@ export default function StampSettings() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">スタンプ設定</h2>
-      <p className="text-sm text-gray-600 mb-6">
+      <h2 className="text-lg font-bold text-slate-700 mb-4">スタンプ設定</h2>
+      <p className="text-sm text-slate-600 mb-6">
         1日の合計時間が目標時間を超えると、スタンプを獲得できます。
       </p>
 
       {/* Stamp Settings */}
       <div className="space-y-4 mb-8">
         <div className="border border-gray-200 rounded-lg p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
             平日のスタンプ獲得時間
           </label>
           <select
@@ -152,7 +152,7 @@ export default function StampSettings() {
         </div>
 
         <div className="border border-gray-200 rounded-lg p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-slate-700 mb-2">
             週末のスタンプ獲得時間
           </label>
           <select
@@ -178,15 +178,15 @@ export default function StampSettings() {
 
       {/* Reset Section */}
       <div className="border-t border-gray-200 pt-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">スタンプリセット</h3>
+        <h3 className="text-base font-bold text-slate-700 mb-4">スタンプリセット</h3>
         <div className="bg-gray-50 rounded-lg p-4 mb-4">
-          <p className="text-sm text-gray-600 mb-2">現在の累積スタンプ数</p>
-          <p className="text-3xl font-bold text-[#003c68]">{stampCount}個</p>
+          <p className="text-sm text-slate-600 mb-2">現在の累積スタンプ数</p>
+          <p className="text-3xl font-bold text-slate-700">{stampCount}個</p>
         </div>
 
         {!showResetConfirm ? (
           <div>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-slate-600 mb-4">
               ※リセットすると累積スタンプ数が0個になります。この操作は取り消せません。
             </p>
             <Button

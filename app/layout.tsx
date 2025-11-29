@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   title: "STUDY TIMER",
   description: "勉強時間を記録・管理するPWAアプリケーション",
   icons: {
-    icon: "/study-timer-icon.png",
-    apple: "/study-timer-icon.png",
+    icon: "/study-timer-icon_2.png",
+    apple: "/study-timer-icon_2.png",
   },
 };
 

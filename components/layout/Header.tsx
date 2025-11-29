@@ -30,13 +30,12 @@ export function Header({ user }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <h1
-            className="text-xl font-bold tracking-wide"
-            style={{ color: 'var(--color-primary)' }}
+            className="text-xl font-bold tracking-wide text-slate-700"
           >
             STUDY TIMER
           </h1>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-slate-600">
               {user?.name || user?.email}
             </span>
             <Button variant="secondary" onClick={handleLogout}>

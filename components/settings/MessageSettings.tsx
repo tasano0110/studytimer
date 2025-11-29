@@ -85,8 +85,8 @@ export default function MessageSettings() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">メッセージ設定</h2>
-      <p className="text-sm text-gray-600 mb-6">
+      <h2 className="text-lg font-bold text-slate-700 mb-4">メッセージ設定</h2>
+      <p className="text-sm text-slate-600 mb-6">
         合計時間に応じて表示されるメッセージを設定できます。
       </p>
 
@@ -97,7 +97,7 @@ export default function MessageSettings() {
           className={`px-6 py-2 rounded-lg font-medium transition-colors ${
             dayType === 'weekday'
               ? 'text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              : 'bg-gray-100 text-slate-700 hover:bg-gray-200'
           }`}
           style={dayType === 'weekday' ? { backgroundColor: colors.primary } : {}}
         >
@@ -108,7 +108,7 @@ export default function MessageSettings() {
           className={`px-6 py-2 rounded-lg font-medium transition-colors ${
             dayType === 'weekend'
               ? 'text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              : 'bg-gray-100 text-slate-700 hover:bg-gray-200'
           }`}
           style={dayType === 'weekend' ? { backgroundColor: colors.primary } : {}}
         >
@@ -120,10 +120,10 @@ export default function MessageSettings() {
       <div className="space-y-4 mb-6">
         {settings.map((setting, index) => (
           <div key={setting.setting_id} className="border border-gray-200 rounded-lg p-4">
-            <div className="text-sm font-medium text-gray-700 mb-2">レベル {index + 1}</div>
+            <div className="text-sm font-medium text-slate-700 mb-2">レベル {index + 1}</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-gray-600 mb-1">時間（時間以上）</label>
+                <label className="block text-sm text-slate-600 mb-1">時間（時間以上）</label>
                 <select
                   value={Math.floor(setting.threshold_minutes / 60)}
                   onChange={(e) => handleSettingChange(index, 'threshold_minutes', Number(e.target.value) * 60)}
@@ -137,7 +137,7 @@ export default function MessageSettings() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-gray-600 mb-1">
+                <label className="block text-sm text-slate-600 mb-1">
                   メッセージ（{setting.message.length}/50文字）
                 </label>
                 <input
